@@ -1,0 +1,26 @@
+{
+  "name": "carbicle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marians1d/js-back-end-carbicle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marians1d/js-back-end-carbicle/issues"
+  },
+  "homepage": "https://github.com/marians1d/js-back-end-carbicle#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-fileupload": "^1.3.1",
+    "express-handlebars": "^6.0.2",
+    "mongoose": "^6.2.0"
+  }
+}
