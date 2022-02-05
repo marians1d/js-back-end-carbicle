@@ -3,18 +3,18 @@
 // [x] create home controller
 // [x] bind routing
 // [x] create layout
-// [x] create data service
+// [ ] create data service
 // - [x] read all
 // - [x] read one by Id
 // - [x] create
 // - [ ] edit
 // - [ ] delete
-// - [ ] search
+// - [x] search
 // - [ ] acssesory create
 // - [ ] acssesory read
 // - [ ] attach acssesory
 // [ ] implement controllers
-// - [ ] home (catalog)
+// - [x] home (catalog)
 // - [x] about
 // - [x] details
 // - [x] create
@@ -24,14 +24,15 @@
 // - [ ] create acssesory
 // - [ ] attach acssesory to car
 // - [ ] update details to include acssesory
-// [ ] add front end code
-// [ ] add database conection
-// [ ] create car model
-// [ ] upgrade car service to use car model
-// [ ] add validation rules to car model
+// [x] add front end code
+// [x] add database conection
+// [x] create car model
+// [x] upgrade car service to use car model
+// [x] add validation rules to car model
 // [ ] create acssesory model
 
-const port = 3000;
+const env = process.env.NODE_ENV || 'development';
+const config = require('./config/config')[env];
 
 const express = require('express');
 const hbs = require('express-handlebars');
@@ -79,5 +80,5 @@ async function start() {
 
     app.all('*', notFound);
 
-    app.listen(port, () => console.log(`Server is started on port ${port}`));
+    app.listen(config.port, () => console.log(`Server is started on port ${config.port}`));
 }
