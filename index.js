@@ -3,12 +3,12 @@
 // [x] create home controller
 // [x] bind routing
 // [x] create layout
-// [ ] create data service
+// [x] create data service
 // - [x] read all
 // - [x] read one by Id
 // - [x] create
-// - [ ] edit
-// - [ ] delete
+// - [x] edit
+// - [x] delete
 // - [x] search
 // - [ ] acssesory create
 // - [ ] acssesory read
@@ -18,7 +18,7 @@
 // - [x] about
 // - [x] details
 // - [x] create
-// - [ ] improved home (search)
+// - [x] improved home (search)
 // - [ ] edit
 // - [ ] delete
 // - [ ] create acssesory
@@ -40,12 +40,14 @@ const fileUpload = require('express-fileupload');
 
 const initDb = require('./models');
 
-const carService = require('./services/cars')
+const carService = require('./services/cars');
+const accessoryService = require('./services/accessory');
 
 const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');
 const { details} = require('./controllers/details');
-const create = require('./controllers/create'); 
+const create = require('./controllers/create');
+const accessory = require('./controllers/accessory');
 
 const { notFound } = require('./controllers/notFound');
 
@@ -69,6 +71,7 @@ async function start() {
     app.use(express.urlencoded({ extended: true }));
     app.use('/public', express.static('static'));
     app.use(carService());
+    app.use(accessoryService());
 
     app.get('/', home);
     app.get('/about', about);
@@ -77,6 +80,14 @@ async function start() {
     app.route('/create')
         .get(create.get)
         .post(create.post);
+
+    //TODO: edit
+
+    //TODO: delete
+
+    app.route('/accessory')
+        .get(accessory.get)
+        .post(accessory.post);
 
     app.all('*', notFound);
 

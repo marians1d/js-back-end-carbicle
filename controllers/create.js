@@ -8,7 +8,7 @@ module.exports = {
 
             if (req.files) {
                 img = req.files.imageUrl;
-                await img.mv('./static/assets/' + img.name);
+                await img.mv('./static/assets/cars/' + img.name);
             }
 
             const car = {
@@ -16,7 +16,7 @@ module.exports = {
                 description: req.body.description,
                 imageUrl: img ? img.name : 'no-image.jpg',
                 price: Number(req.body.price)
-            }
+            };
 
             try {
                 await req.catalog.createCar(car);
