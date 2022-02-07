@@ -22,8 +22,7 @@ function accessoryViewModel(accessory) {
         name: accessory.name,
         description: accessory.description,
         imageUrl: accessory.imageUrl,
-        price: accessory.price,
-        peripherals: accessory.peripherals
+        price: accessory.price
     };
 }
 

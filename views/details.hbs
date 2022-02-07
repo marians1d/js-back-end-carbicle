@@ -6,4 +6,13 @@
   <p><span>Price:</span> {{price}}</p>
   <a class="btn" href="/">Back</a>
 </div>
+
+<h2>Accessories</h2>
+<div class="accessories">
+  {{#each accessories}}
+  {{> accessoryCard}}
+  {{else}}
+  <h3 class="italic">This car has no accessories yet...</h3>
+  {{/each}}
+</div>
 {{/with}}
