@@ -10,9 +10,9 @@
 // - [x] edit
 // - [x] delete
 // - [x] search
-// - [ ] acssesory create
-// - [ ] acssesory read
-// - [ ] attach acssesory
+// - [x] acssesory create
+// - [x] acssesory read
+// - [x] attach acssesory
 // [ ] implement controllers
 // - [x] home (catalog)
 // - [x] about
@@ -21,15 +21,15 @@
 // - [x] improved home (search)
 // - [ ] edit
 // - [ ] delete
-// - [ ] create acssesory
-// - [ ] attach acssesory to car
-// - [ ] update details to include acssesory
+// - [x] create acssesory
+// - [x] attach acssesory to car
+// - [x] update details to include acssesory
 // [x] add front end code
 // [x] add database conection
 // [x] create car model
 // [x] upgrade car service to use car model
 // [x] add validation rules to car model
-// [ ] create acssesory model
+// [x] create acssesory model
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./config/config')[env];
@@ -45,9 +45,10 @@ const accessoryService = require('./services/accessory');
 
 const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');
-const { details} = require('./controllers/details');
 const create = require('./controllers/create');
+const { details} = require('./controllers/details');
 const accessory = require('./controllers/accessory');
+const attach = require('./controllers/attach');
 
 const { notFound } = require('./controllers/notFound');
 
@@ -88,6 +89,10 @@ async function start() {
     app.route('/accessory')
         .get(accessory.get)
         .post(accessory.post);
+
+    app.route('/attach/:id')
+        .get(attach.get)
+        .post(attach.post);
 
     app.all('*', notFound);
 

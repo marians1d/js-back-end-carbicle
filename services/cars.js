@@ -28,7 +28,7 @@ async function getAll(query) {
 }
 
 async function getById(id) {
-    const car = await Car.findById(id);
+    const car = await Car.findById(id).populate('accessories');
     if (car) {
         return carViewModel(car);
     } else {
@@ -74,7 +74,7 @@ async function deleteCar(id, ownerId) {
 
 }
 
-async function attachAccessesory(carId, accessoryId) {
+async function attachAccessory(carId, accessoryId) {
     const existing = await Car.findById(carId);
 
     existing.accessories.push(accessoryId);
@@ -89,7 +89,7 @@ module.exports = () => (req, res, next) => {
         createCar,
         updateById,
         deleteCar,
-        attachAccessesory
+        attachAccessory
     }
 
     next();

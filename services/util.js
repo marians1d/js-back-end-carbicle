@@ -9,7 +9,7 @@ function carViewModel(car) {
         isDeleted: car.isDeleted
     };
 
-    if (model.accessories.lenght > 0 && model.accessories[0].name) {
+    if (model.accessories.length > 0 && model.accessories[0].name) {
         model.accessories = model.accessories.map(accessoryViewModel);
     }
 

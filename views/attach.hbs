@@ -1,9 +1,9 @@
 <h1>Attach a new accessory</h1>
 <div class="form">
     <h2>{{car.name}}</h2>
-    <img class="cube" src="https://images-na.ssl-images-amazon.com/images/I/71WS9kb-JFL._SL1300_.jpg">
+    <img class="cube" src="/public/assets/cars/{{car.imageUrl}}">
     {{#if accessories}}
-    <form action="/attach" method="POST">
+    <form action="/attach/{{car.id}}" method="POST">
         <label for="accessory">Accessories</label>
         <select id="accessory" name="accessory" />
         {{#each accessories}}
