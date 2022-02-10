@@ -29,8 +29,9 @@ img.logo {
 }
 
 header {
-    list-style-type: none;
-    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     padding: 0;
     background-color: #cda379;
 }
@@ -51,6 +52,13 @@ header ul li a {
 header ul li a:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    align-items: center;
 }
 
 main {

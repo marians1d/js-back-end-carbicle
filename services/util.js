@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt'); 
+
 function carViewModel(car) {
     const model = {
         id: car._id,
@@ -26,7 +28,28 @@ function accessoryViewModel(accessory) {
     };
 }
 
+async function hashPassword(password) {
+    return bcrypt.hash(password, 10);
+}
+
+async function comparePasswords(password, hashedPassword) {
+    return bcrypt.compare(password, hashedPassword);
+}
+
+function isLogedIn() {
+    return function (req, res, next) {
+        if (req.session.user) {
+            next();
+        } else {
+            res.redirect('/login');
+        }
+    }
+}
+
 module.exports = {
     carViewModel,
-    accessoryViewModel
+    accessoryViewModel,
+    hashPassword,
+    comparePasswords,
+    isLogedIn
 }

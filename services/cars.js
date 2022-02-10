@@ -28,12 +28,12 @@ async function getAll(query) {
 }
 
 async function getById(id) {
-    const car = await Car.findById(id).populate('accessories');
+    const car = await Car.findById(id).where({ isDeleted: false }).populate('accessories');
     if (car) {
         return carViewModel(car);
     } else {
         return undefined;
-    }
+    } 
 }
 
 async function createCar(car) {
@@ -42,7 +42,7 @@ async function createCar(car) {
 }
 
 async function updateById(id, car) {
-    const existing = await Car.findById(id);
+    const existing = await Car.findById(id).where({ isDeleted: false });
 
     if (existing.imageUrl !== car.imageUrl && existing.imageUrl !== 'no-image.jpg') {
         await fs.unlink('./static/assets/cars/' + existing.imageUrl);

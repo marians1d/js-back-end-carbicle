@@ -1,0 +1,16 @@
+<h1>Delete Cube</h1>
+<div class="form">
+    {{#with car}}
+    <form action="/delete" method="POST" enctype="multipart/form-data">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="{{name}}" disabled="true" />
+        <label for="description">Description</label>
+        <textarea id="description" name="description" disabled="true" />{{description}}</textarea>
+        <label for="image">ImageUrl</label>
+        <input type="file" id="image" name="imageUrl" value="{{imageUrl}}" disabled="true" />
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" value="{{price}}" disabled="true" />
+        <input type="submit" value="Delete">
+    </form>
+    {{/with}}
+</div>
