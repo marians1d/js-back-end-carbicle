@@ -1,7 +1,7 @@
 <h1>Delete Cube</h1>
 <div class="form">
     {{#with car}}
-    <form action="/delete" method="POST" enctype="multipart/form-data">
+    <form action="/delete/{{id}}" method="POST" enctype="multipart/form-data">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" value="{{name}}" disabled="true" />
         <label for="description">Description</label>

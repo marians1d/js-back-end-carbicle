@@ -16,15 +16,15 @@
 // - [x] register user
 // - [x] login user
 // - [x] logout user
-// - [ ] add authorization checks to data modification
-// [ ] implement controllers
+// - [x] add authorization checks to data modification
+// [x] implement controllers
 // - [x] home (catalog)
 // - [x] about
 // - [x] details
 // - [x] create
 // - [x] improved home (search)
-// - [ ] edit
-// - [ ] delete
+// - [x] edit
+// - [x] delete
 // - [x] create acssesory
 // - [x] attach acssesory to car
 // - [x] update details to include acssesory
@@ -38,7 +38,8 @@
 // [x] create Acssesory model
 // [x] add session middleware and auth libraries
 // [x] create User model
-// [ ] add owner property to Car, Accessory models
+// [x] add owner property to Car, Accessory models
+// [ ] only show edit buttons for record owner
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./config/config')[env];
@@ -58,6 +59,8 @@ const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');
 const create = require('./controllers/create');
 const { details } = require('./controllers/details');
+const edit = require('./controllers/edit');
+const deleteCar = require('./controllers/delete');
 const accessory = require('./controllers/accessory');
 const attach = require('./controllers/attach');
 
@@ -104,9 +107,13 @@ async function start() {
         .get(isLogedIn(), create.get)
         .post(isLogedIn(), create.post);
 
-    //TODO: edit
+    app.route('/edit/:id')
+        .get(isLogedIn(), edit.get)
+        .post(isLogedIn(), edit.post);
 
-    //TODO: delete
+    app.route('/delete/:id')
+        .get(isLogedIn(), deleteCar.get)
+        .post(isLogedIn(), deleteCar.post);
 
     app.route('/accessory')
         .get(isLogedIn(), accessory.get)

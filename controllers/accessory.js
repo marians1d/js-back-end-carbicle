@@ -1,5 +1,8 @@
 module.exports = {
     get(req, res) {
+
+
+
         res.render('createAccessory', { title: 'Add Accessory'});
     },
     async post(req, res) {
@@ -15,6 +18,7 @@ module.exports = {
             description: req.body.description,
             imageUrl: img ? img.name : 'no-image.jpg',
             price: Number(req.body.price),
+            owner: req.session.user.id
         };
 
         try {
@@ -23,7 +27,7 @@ module.exports = {
             res.redirect('/');           
         } catch (err) {
             console.log('Error creating accessory');
-            console.log(err);
+            console.log(err.message);
             res.redirect('/accessory');
         }
     }

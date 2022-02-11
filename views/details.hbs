@@ -4,7 +4,11 @@
 <div class="details">
   <p><span>Description:</span> {{description}}</p>
   <p><span>Price:</span> {{price}}</p>
+  {{#if isOwner}}
   <a href="/attach/{{id}}" class="btn">Attach accessory</a>
+  <a href="/edit/{{id}}" class="btn">Edit</a>
+  <a href="/delete/{{id}}" class="btn">Delete</a>
+  {{/if}}
   <a class="btn" href="/">Back</a>
 </div>
 <h2>Accessories</h2>

@@ -33,7 +33,7 @@ async function getById(id) {
         return carViewModel(car);
     } else {
         return undefined;
-    } 
+    }
 }
 
 async function createCar(car) {
@@ -41,11 +41,15 @@ async function createCar(car) {
     await carResult.save();
 }
 
-async function updateById(id, car) {
+async function updateById(id, car, ownerId) {
     const existing = await Car.findById(id).where({ isDeleted: false });
 
-    if (existing.imageUrl !== car.imageUrl && existing.imageUrl !== 'no-image.jpg') {
+    if (existing.owner != ownerId) return false;
+
+    if (car.imageUrl != 'no-image.jpg' && existing.imageUrl != car.imageUrl && existing.imageUrl != 'no-image.jpg') {
         await fs.unlink('./static/assets/cars/' + existing.imageUrl);
+    } else if (car.imageUrl == 'no-image.jpg') {
+        car.imageUrl = existing.imageUrl;
     }
 
     existing.name = car.name;
@@ -55,31 +59,36 @@ async function updateById(id, car) {
     existing.accessories = car.accessories;
 
     await existing.save();
+
+    return true;
 }
 
 async function deleteCar(id, ownerId) {
     const existing = await Car.findById(id).where({ isDeleted: false });
+    
+    if (existing.owner != ownerId) return false;
 
-    if (existing.imageUrl !== 'no-image.jpg') {
+    if (existing.imageUrl != 'no-image.jpg') {
         await fs.unlink('./static/assets/cars/' + existing.imageUrl);
     }
 
-    if (existing.owner != ownerId) return false;
-
     existing.isDeleted = true;
 
-    await Car.findByIdAndUpdate(id, { isDeleted: true });
+    await existing.save();
 
     return true;
-
 }
 
-async function attachAccessory(carId, accessoryId) {
+async function attachAccessory(carId, accessoryId, ownerId) {
     const existing = await Car.findById(carId);
+
+    if (existing.owner != ownerId) return false;
 
     existing.accessories.push(accessoryId);
 
     await existing.save();
+
+    return true;
 }
 
 module.exports = () => (req, res, next) => {
