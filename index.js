@@ -36,10 +36,10 @@
 // [x] upgrade car service to use Car model
 // [x] add validation rules to Car model
 // [x] create Acssesory model
-// [x] add session middleware and auth libraries
-// [x] create User model
+// [x] add session middleware and auth libraries  
+// [x] create User model                           
 // [x] add owner property to Car, Accessory models
-// [ ] only show edit buttons for record owner
+// [x] only show edit buttons for record owner
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./config/config')[env];
@@ -64,7 +64,7 @@ const deleteCar = require('./controllers/delete');
 const accessory = require('./controllers/accessory');
 const attach = require('./controllers/attach');
 
-const { registerGet, registerPost, loginGet, loginPost, logoutGet } = require('./controllers/auth');
+const authController = require('./controllers/auth');
 
 const { notFound } = require('./controllers/notFound');
 const { isLogedIn } = require('./services/util');
@@ -123,15 +123,7 @@ async function start() {
         .get(isLogedIn(), attach.get)
         .post(isLogedIn(), attach.post);
 
-    app.route('/register')
-        .get(registerGet)
-        .post(registerPost);
-
-    app.route('/login')
-        .get(loginGet)
-        .post(loginPost);
-
-    app.get('/logout', logoutGet);
+    app.use(authController);
 
     app.all('*', notFound);
 
